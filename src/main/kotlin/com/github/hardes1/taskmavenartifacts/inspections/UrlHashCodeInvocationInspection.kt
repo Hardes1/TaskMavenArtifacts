@@ -21,7 +21,7 @@ class UrlHashCodeInvocationInspection : AbstractBaseUastLocalInspectionTool() {
                     val name = node.methodName ?: return false
                     val classRef = node.receiverType ?: return false
                     if (name == HASH_CODE_NAME && classRef.canonicalText == URL_CANONICAL_NAME) {
-                        node.sourcePsi?.let {
+                        node.methodIdentifier?.sourcePsi?.let {
                             holder.registerProblem(
                                 it,
                                 InspectionBundle.message("inspection.URL.call.hashcode.explicit")
