@@ -11,37 +11,39 @@ class UrlHashCodeInspectionExplicitKotlinTest : LightJavaCodeInsightFixtureTestC
     override fun setUp() {
         super.setUp()
         myFixture.enableInspections(UrlHashCodeInvocationInspection())
-        myFixture.addClass("package java.net; public final class URL {@Override public int hashCode() {return super.hashCode();}}")
+        myFixture.addClass("package java.net; public final class URL {public int hashCode() {return super.hashCode();}}")
+        myFixture.addClass("package java.lang; public class Object {public int hashCode() { return 0;}}")
+
         testRunner = TestRunner(myFixture, FileExtension.KOTLIN)
     }
 
     override fun getTestDataPath() = "src/test/testData/kotlin"
 
     fun testHighlightReferenceSimpleName() {
-        testRunner.doTest(TestType.REFERENCE_SIMPLE, 1)
+        testRunner.doTest(TestType.REFERENCE_SIMPLE)
     }
 
     fun testHighlightReferenceFullName() {
-        testRunner.doTest(TestType.REFERENCE_FULL, 1)
+        testRunner.doTest(TestType.REFERENCE_FULL)
     }
 
     fun testHighlightTemporarySimpleName() {
-        testRunner.doTest(TestType.TEMPORARY_SIMPLE, 1)
+        testRunner.doTest(TestType.TEMPORARY_SIMPLE)
     }
 
     fun testHighlightTemporaryFullName() {
-        testRunner.doTest(TestType.TEMPORARY_FULL, 1)
+        testRunner.doTest(TestType.TEMPORARY_FULL)
     }
 
     fun testHighlightAsFieldSimpleName() {
-        testRunner.doTest(TestType.AS_FIELD_SIMPLE, 1)
+        testRunner.doTest(TestType.AS_FIELD_SIMPLE)
     }
 
     fun testHighlightAsFieldFullName() {
-        testRunner.doTest(TestType.AS_FIELD_FULL, 1)
+        testRunner.doTest(TestType.AS_FIELD_FULL)
     }
 
     fun testHighlightCombined() {
-        testRunner.doTest(TestType.COMBINED, 8)
+        testRunner.doTest(TestType.COMBINED)
     }
 }

@@ -4,13 +4,13 @@ import java.net.URL
 
 fun main() {
     val url: URL = URL()
-    url.hashCode()
-    java.net.URL().hashCode()
+    url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
+    java.net.URL().<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
     val url1: java.net.URL = java.net.URL()
-    url1.hashCode()
-    java.net.URL().hashCode()
-    URLFieldSimpleName().url.hashCode()
-    URLFieldFullName().url.hashCode()
+    url1.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
+    java.net.URL().<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
+    URLFieldSimpleName().url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
+    URLFieldFullName().url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
 }
 
 
@@ -20,7 +20,7 @@ class URLFieldSimpleName {
 
     init {
         url = URL()
-        url.hashCode()
+        url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
     }
 }
 
@@ -29,6 +29,6 @@ class URLFieldFullName() {
 
     init {
         url = java.net.URL()
-        url.hashCode()
+        url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>()
     }
 }

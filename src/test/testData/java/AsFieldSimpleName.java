@@ -5,7 +5,7 @@ import java.net.URL;
 class AsFieldSimpleName {
     public static void main() {
         URLField urlField = new URLField();
-        urlField.url.hashCode();
+        urlField.url.<warning descr="Attempt to call hashCode() explicitly on URL object">hashCode</warning>();
     }
 }
 
