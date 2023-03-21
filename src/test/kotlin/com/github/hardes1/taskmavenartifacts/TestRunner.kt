@@ -7,7 +7,7 @@ import junit.framework.TestCase
 
 class TestRunner(private val myFixture: CodeInsightTestFixture, private val extension: FileExtension) {
     fun doTest(testType: TestType, count: Int) {
-        val path = "${testType.pathName}${extension.pathName}"
+        val path = "${testType.pathName}${extension.type}"
         myFixture.configureByFile(path)
         val highlightInfos = myFixture.doHighlighting()
         val message = InspectionBundle.getMessage("inspection.URL.call.hashcode.explicit")

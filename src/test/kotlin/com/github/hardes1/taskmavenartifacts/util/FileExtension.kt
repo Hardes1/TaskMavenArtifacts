@@ -1,6 +1,6 @@
 package com.github.hardes1.taskmavenartifacts.util
 
-enum class FileExtension(val pathName: String) {
+enum class FileExtension(val type: String) {
     JAVA(".java"),
-    KOTLIN(".kotlin")
+    KOTLIN(".kt")
 }
