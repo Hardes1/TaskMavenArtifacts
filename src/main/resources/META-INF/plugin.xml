@@ -30,6 +30,16 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="JAVA"
+                         bundle="messages.InspectionBundle"
+                         key="inspection.URL.call.hashcode.data.structure"
+                         groupKey="inspection.URL.group.bundle.java"
+                         enabledByDefault="true"
+                         level="WARNING"
+                         implementationClass="com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeDataStructureJavaInspection"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
         <localInspection language="UAST"
                          bundle="messages.InspectionBundle"
                          key="inspection.URL.call.hashcode.data.implicit"

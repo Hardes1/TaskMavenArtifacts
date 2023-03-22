@@ -2,6 +2,7 @@ package com.github.hardes1.taskmavenartifacts.inspections
 
 import com.github.hardes1.taskmavenartifacts.CommonConstants
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
+import com.github.hardes1.taskmavenartifacts.JavaUtils
 import com.intellij.codeInspection.AbstractBaseUastLocalInspectionTool
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
@@ -24,11 +25,10 @@ class URLHashCodeImplicitInvocationInspection : AbstractBaseUastLocalInspectionT
                 override fun visitCallExpression(node: UCallExpression): Boolean {
                     val methodName = node.methodName ?: return false
                     val classRef = node.receiverType ?: return false
-                    println(classRef.canonicalText)
                     if (
                         isTypeACollection(classRef, collectionTypes)
                         && methodName == CommonConstants.HASH_CODE_NAME
-                        && isReferenceNameContainsURL(classRef.canonicalText)
+                        && JavaUtils.isReferenceNameContainsURL(classRef.canonicalText)
                     ) {
                         node.methodIdentifier?.sourcePsi?.let {
                             holder.registerProblem(
@@ -47,22 +47,5 @@ class URLHashCodeImplicitInvocationInspection : AbstractBaseUastLocalInspectionT
         return collectionTypes.any { it.isAssignableFrom(classRef) } || classRef.canonicalText.endsWith("[]")
     }
 
-    private fun isReferenceNameContainsURL(canonicalName: String): Boolean {
-        val trimmedName =
-            if (canonicalName.endsWith(">"))
-                canonicalName.dropWhile { it != '<' }.dropLastWhile { it != '>' }.drop(1).dropLast(1)
-            else canonicalName
-        var bracketBalance = 0
-        println(trimmedName)
-        for (i in trimmedName.indices) {
-            if (trimmedName[i] == '<') {
-                bracketBalance++
-            } else if (trimmedName[i] == '>') {
-                bracketBalance--
-            } else if (trimmedName[i] == ',' && bracketBalance == 0) {
-                return trimmedName.take(i + 1).contains(CommonConstants.URL_CANONICAL_NAME)
-            }
-        }
-        return trimmedName.contains(CommonConstants.URL_CANONICAL_NAME)
-    }
+
 }
