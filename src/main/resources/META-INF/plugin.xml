@@ -25,6 +25,6 @@
                          groupKey="inspection.URL.group.bundle"
                          enabledByDefault="true"
                          level="WARNING"
-                         implementationClass="com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeImplicitInvocationKotlinInspection"/>
+                         implementationClass="com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeDataStructureInspection"/>
     </extensions>
 </idea-plugin>
