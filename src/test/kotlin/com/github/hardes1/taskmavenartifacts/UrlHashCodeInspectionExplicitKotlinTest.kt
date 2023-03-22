@@ -1,6 +1,6 @@
 package com.github.hardes1.taskmavenartifacts
 
-import com.github.hardes1.taskmavenartifacts.inspections.UrlHashCodeInvocationInspection
+import com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeExplicitInvocationInspection
 import com.github.hardes1.taskmavenartifacts.util.FileExtension
 import com.github.hardes1.taskmavenartifacts.util.TestType
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
@@ -10,7 +10,7 @@ class UrlHashCodeInspectionExplicitKotlinTest : LightJavaCodeInsightFixtureTestC
 
     override fun setUp() {
         super.setUp()
-        myFixture.enableInspections(UrlHashCodeInvocationInspection())
+        myFixture.enableInspections(URLHashCodeExplicitInvocationInspection::class.java)
         myFixture.addClass("package java.net; public final class URL {public int hashCode() {return super.hashCode();}}")
         myFixture.addClass("package java.lang; public class Object {public int hashCode() { return 0;}}")
 

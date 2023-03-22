@@ -1,5 +1,6 @@
 package com.github.hardes1.taskmavenartifacts.inspections
 
+import com.github.hardes1.taskmavenartifacts.CommonConstants
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
 import com.intellij.codeInspection.AbstractBaseUastLocalInspectionTool
 import com.intellij.codeInspection.ProblemsHolder
@@ -9,9 +10,8 @@ import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.visitor.AbstractUastNonRecursiveVisitor
 
 private const val HASH_CODE_NAME = "hashCode"
-private const val URL_CANONICAL_NAME = "java.net.URL"
 
-class UrlHashCodeInvocationInspection : AbstractBaseUastLocalInspectionTool() {
+class URLHashCodeExplicitInvocationInspection : AbstractBaseUastLocalInspectionTool() {
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return UastHintedVisitorAdapter.create(
@@ -20,7 +20,7 @@ class UrlHashCodeInvocationInspection : AbstractBaseUastLocalInspectionTool() {
                 override fun visitCallExpression(node: UCallExpression): Boolean {
                     val name = node.methodName ?: return false
                     val classRef = node.receiverType ?: return false
-                    if (name == HASH_CODE_NAME && classRef.canonicalText == URL_CANONICAL_NAME) {
+                    if (name == HASH_CODE_NAME && classRef.canonicalText == CommonConstants.URL_CANONICAL_NAME) {
                         node.methodIdentifier?.sourcePsi?.let {
                             holder.registerProblem(
                                 it,
