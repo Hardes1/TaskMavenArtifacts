@@ -14,9 +14,10 @@ import org.jetbrains.uast.visitor.AbstractUastNonRecursiveVisitor
 class URLHashCodeImplicitInvocationInspection : AbstractBaseUastLocalInspectionTool() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         val project = holder.project
-        val collectionElement =
-            PsiType.getTypeByName("java.util.Collection", project, GlobalSearchScope.allScope(project))
-        val mapElement = PsiType.getTypeByName("java.util.Map", project, GlobalSearchScope.allScope(project))
+        val collectionTypes = listOf(
+            PsiType.getTypeByName("java.util.Collection", project, GlobalSearchScope.allScope(project)),
+            PsiType.getTypeByName("java.util.Map", project, GlobalSearchScope.allScope(project))
+        )
         return UastHintedVisitorAdapter.create(
             holder.file.language,
             object : AbstractUastNonRecursiveVisitor() {
@@ -25,7 +26,7 @@ class URLHashCodeImplicitInvocationInspection : AbstractBaseUastLocalInspectionT
                     val classRef = node.receiverType ?: return false
                     println(classRef.canonicalText)
                     if (
-                        (collectionElement.isAssignableFrom(classRef) || mapElement.isAssignableFrom(classRef))
+                        isTypeACollection(classRef, collectionTypes)
                         && methodName == CommonConstants.HASH_CODE_NAME
                         && isReferenceNameContainsURL(classRef.canonicalText)
                     ) {
@@ -42,8 +43,15 @@ class URLHashCodeImplicitInvocationInspection : AbstractBaseUastLocalInspectionT
         )
     }
 
+    private fun isTypeACollection(classRef: PsiType, collectionTypes: Collection<PsiType>): Boolean {
+        return collectionTypes.any { it.isAssignableFrom(classRef) } || classRef.canonicalText.endsWith("[]")
+    }
+
     private fun isReferenceNameContainsURL(canonicalName: String): Boolean {
-        val trimmedName = canonicalName.dropWhile { it != '<' }.dropLastWhile { it != '>' }.dropLast(1).drop(1)
+        val trimmedName =
+            if (canonicalName.endsWith(">"))
+                canonicalName.dropWhile { it != '<' }.dropLastWhile { it != '>' }.drop(1).dropLast(1)
+            else canonicalName
         var bracketBalance = 0
         println(trimmedName)
         for (i in trimmedName.indices) {

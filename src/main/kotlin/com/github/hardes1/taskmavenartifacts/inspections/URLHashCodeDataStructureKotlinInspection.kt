@@ -13,12 +13,15 @@ import org.jetbrains.kotlin.types.TypeProjection
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
 class URLHashCodeDataStructureKotlinInspection : AbstractKotlinInspection() {
+    private val collectionsInterfaces =
+        listOf("kotlin.Array", "kotlin.collections.Collection", "kotlin.collections.Map")
+
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return propertyVisitor { property ->
             val type = property.type() ?: return@propertyVisitor
             val arguments = type.arguments
             val superTypes = type.supertypes()
-            if ((isTypeAnArray(type) || isTypeACollection(superTypes)) && isContainsUrlAsTypeProjection(arguments)) {
+            if (isTypeACollection(superTypes + type) && isContainsUrlAsTypeProjection(arguments)) {
                 holder.registerProblem(
                     property,
                     InspectionBundle.getMessage("inspection.URL.call.hashcode.data.structure")
@@ -26,8 +29,6 @@ class URLHashCodeDataStructureKotlinInspection : AbstractKotlinInspection() {
             }
         }
     }
-
-    private fun isTypeAnArray(type: KotlinType) = type.getJetTypeFqName(false) == "kotlin.Array"
 
     private fun isContainsUrlAsTypeProjection(arguments: List<TypeProjection>): Boolean {
         if (arguments.isEmpty()) {
@@ -37,7 +38,7 @@ class URLHashCodeDataStructureKotlinInspection : AbstractKotlinInspection() {
         return name.contains(CommonConstants.URL_CANONICAL_NAME)
     }
 
-    private fun isTypeACollection(superTypes: Collection<KotlinType>): Boolean =
-        superTypes.any { it.getJetTypeFqName(false) == "kotlin.collections.Collection" }
+    private fun isTypeACollection(superTypes: Collection<KotlinType>) =
+        superTypes.any { it.getJetTypeFqName(false) in collectionsInterfaces }
 }
 
