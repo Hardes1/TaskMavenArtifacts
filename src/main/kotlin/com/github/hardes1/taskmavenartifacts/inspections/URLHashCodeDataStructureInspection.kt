@@ -19,7 +19,10 @@ class URLHashCodeDataStructureInspection : AbstractKotlinInspection() {
             val arguments = type.arguments
             val superTypes = type.supertypes()
             if ((isTypeAnArray(type) || isTypeACollection(superTypes)) && isContainsUrlAsTypeProjection(arguments)) {
-                holder.registerProblem(property, InspectionBundle.getMessage("inspection.URL.call.hashcode.implicit"))
+                holder.registerProblem(
+                    property,
+                    InspectionBundle.getMessage("inspection.URL.call.hashcode.data.structure")
+                )
             }
         }
     }
@@ -34,11 +37,7 @@ class URLHashCodeDataStructureInspection : AbstractKotlinInspection() {
         return name.contains(CommonConstants.URL_CANONICAL_NAME)
     }
 
-    private fun isTypeACollection(superTypes: Collection<KotlinType>): Boolean {
-        for (elem in superTypes) {
-            println(elem.getJetTypeFqName(false))
-        }
-        return superTypes.any { it.getJetTypeFqName(false) == "kotlin.collections.Collection" }
-    }
+    private fun isTypeACollection(superTypes: Collection<KotlinType>): Boolean =
+        superTypes.any { it.getJetTypeFqName(false) == "kotlin.collections.Collection" }
 }
 

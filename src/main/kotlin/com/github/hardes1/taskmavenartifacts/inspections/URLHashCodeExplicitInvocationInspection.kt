@@ -9,8 +9,6 @@ import com.intellij.uast.UastHintedVisitorAdapter
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.visitor.AbstractUastNonRecursiveVisitor
 
-private const val HASH_CODE_NAME = "hashCode"
-
 class URLHashCodeExplicitInvocationInspection : AbstractBaseUastLocalInspectionTool() {
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
@@ -20,7 +18,7 @@ class URLHashCodeExplicitInvocationInspection : AbstractBaseUastLocalInspectionT
                 override fun visitCallExpression(node: UCallExpression): Boolean {
                     val name = node.methodName ?: return false
                     val classRef = node.receiverType ?: return false
-                    if (name == HASH_CODE_NAME && classRef.canonicalText == CommonConstants.URL_CANONICAL_NAME) {
+                    if (name == CommonConstants.HASH_CODE_NAME && classRef.canonicalText == CommonConstants.URL_CANONICAL_NAME) {
                         node.methodIdentifier?.sourcePsi?.let {
                             holder.registerProblem(
                                 it,

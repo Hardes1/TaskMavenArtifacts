@@ -21,10 +21,20 @@
     <extensions defaultExtensionNs="com.intellij">
         <localInspection language="kotlin"
                          bundle="messages.InspectionBundle"
-                         key="inspection.URL.call.hashcode.implicit"
+                         key="inspection.URL.call.hashcode.data.structure"
                          groupKey="inspection.URL.group.bundle"
                          enabledByDefault="true"
                          level="WARNING"
                          implementationClass="com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeDataStructureInspection"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <localInspection language="UAST"
+                         bundle="messages.InspectionBundle"
+                         key="inspection.URL.call.hashcode.data.implicit"
+                         groupKey="inspection.URL.group.bundle"
+                         enabledByDefault="true"
+                         level="WARNING"
+                         implementationClass="com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeImplicitInvocationInspection"/>
     </extensions>
 </idea-plugin>
