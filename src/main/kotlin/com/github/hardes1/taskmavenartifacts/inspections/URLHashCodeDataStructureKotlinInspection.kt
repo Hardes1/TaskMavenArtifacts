@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.types.KotlinType
 import org.jetbrains.kotlin.types.TypeProjection
 import org.jetbrains.kotlin.types.typeUtil.supertypes
 
-class URLHashCodeDataStructureInspection : AbstractKotlinInspection() {
+class URLHashCodeDataStructureKotlinInspection : AbstractKotlinInspection() {
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return propertyVisitor { property ->
             val type = property.type() ?: return@propertyVisitor
