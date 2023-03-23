@@ -1,0 +1,5 @@
+package com.github.hardes1.taskmavenartifacts.explicit
+
+import com.github.hardes1.taskmavenartifacts.util.FileExtension
+
+class URLHashCodeInspectionExplicitKotlinTest : BaseURLHashCodeInspectionExplicitTest(FileExtension.KOTLIN)
