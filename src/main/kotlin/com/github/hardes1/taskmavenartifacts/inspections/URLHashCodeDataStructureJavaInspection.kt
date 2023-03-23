@@ -1,7 +1,7 @@
 package com.github.hardes1.taskmavenartifacts.inspections
 
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
-import com.github.hardes1.taskmavenartifacts.JavaUtils
+import com.github.hardes1.taskmavenartifacts.utils.JavaUtils
 import com.intellij.codeInspection.AbstractBaseJavaLocalInspectionTool
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.JavaElementVisitor

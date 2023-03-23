@@ -1,4 +1,4 @@
-package com.github.hardes1.taskmavenartifacts
+package com.github.hardes1.taskmavenartifacts.utils
 
 import org.jetbrains.kotlin.js.descriptorUtils.getJetTypeFqName
 import org.jetbrains.kotlin.types.KotlinType

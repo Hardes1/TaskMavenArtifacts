@@ -1,8 +1,8 @@
 package com.github.hardes1.taskmavenartifacts.inspections
 
-import com.github.hardes1.taskmavenartifacts.CommonConstants
+import com.github.hardes1.taskmavenartifacts.utils.CommonConstants
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
-import com.github.hardes1.taskmavenartifacts.JavaUtils
+import com.github.hardes1.taskmavenartifacts.utils.JavaUtils
 import com.intellij.codeInspection.AbstractBaseUastLocalInspectionTool
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor

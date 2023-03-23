@@ -1,4 +1,4 @@
-package com.github.hardes1.taskmavenartifacts
+package com.github.hardes1.taskmavenartifacts.utils
 
 import com.intellij.psi.PsiType
 

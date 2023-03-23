@@ -1,6 +1,6 @@
 package com.github.hardes1.taskmavenartifacts.inspections
 
-import com.github.hardes1.taskmavenartifacts.KotlinUtils
+import com.github.hardes1.taskmavenartifacts.utils.KotlinUtils
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor

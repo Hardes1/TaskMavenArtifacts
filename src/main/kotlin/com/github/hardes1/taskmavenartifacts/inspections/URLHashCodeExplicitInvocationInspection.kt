@@ -1,6 +1,6 @@
 package com.github.hardes1.taskmavenartifacts.inspections
 
-import com.github.hardes1.taskmavenartifacts.CommonConstants
+import com.github.hardes1.taskmavenartifacts.utils.CommonConstants
 import com.github.hardes1.taskmavenartifacts.InspectionBundle
 import com.intellij.codeInspection.AbstractBaseUastLocalInspectionTool
 import com.intellij.codeInspection.ProblemsHolder
@@ -31,5 +31,4 @@ class URLHashCodeExplicitInvocationInspection : AbstractBaseUastLocalInspectionT
             }, arrayOf(UCallExpression::class.java)
         )
     }
-
 }
