@@ -1,5 +1,6 @@
-package com.github.hardes1.taskmavenartifacts
+package com.github.hardes1.taskmavenartifacts.explicit
 
+import com.github.hardes1.taskmavenartifacts.util.TestRunner
 import com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeExplicitInvocationInspection
 import com.github.hardes1.taskmavenartifacts.util.FileExtension
 import com.github.hardes1.taskmavenartifacts.util.TestType
@@ -17,7 +18,7 @@ class UrlHashCodeInspectionExplicitKotlinTest : LightJavaCodeInsightFixtureTestC
         testRunner = TestRunner(myFixture, FileExtension.KOTLIN)
     }
 
-    override fun getTestDataPath() = "src/test/testData/kotlin"
+    override fun getTestDataPath() = "src/test/testData/kotlin/explicit"
 
     fun testHighlightReferenceSimpleName() {
         testRunner.doTest(TestType.REFERENCE_SIMPLE)

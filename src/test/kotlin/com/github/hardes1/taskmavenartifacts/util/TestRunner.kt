@@ -1,4 +1,4 @@
-package com.github.hardes1.taskmavenartifacts
+package com.github.hardes1.taskmavenartifacts.util
 
 import com.github.hardes1.taskmavenartifacts.util.FileExtension
 import com.github.hardes1.taskmavenartifacts.util.TestType
