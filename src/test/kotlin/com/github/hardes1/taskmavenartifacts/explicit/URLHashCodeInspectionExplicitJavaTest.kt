@@ -6,7 +6,6 @@ import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
 
-@TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class URLHashCodeInspectionExplicitJavaTest : LightJavaCodeInsightFixtureTestCase(), TestRunnerOwner {
     override val testRunner: TestRunner by lazy {
         HighlightTestRunner(myFixture, FileExtension.JAVA)
