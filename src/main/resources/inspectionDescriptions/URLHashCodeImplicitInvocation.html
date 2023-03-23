@@ -1,7 +1,10 @@
 <html lang="en">
 <body>
 <p>
-    Highlights data structures which contains URL type and invokes hashCode.
+    The hashCode method of java.net.URL may trigger a name service (usually DNS) lookup to resolve the host name or IP address. Depending on the configuration, and network status, that can take a long time. URI on the other hand makes no such calls and should be used instead unless the specific URL functionality is required.
+</p>
+<p>
+    In general it is better to use the URI class until access to the resource is actually needed, at which point you can just convert the URI to a URL using URI.toURL().
 </p>
 </body>
 </html>
