@@ -7,6 +7,8 @@ private const val PREFIX_ARRAY_LIST = "ArrayList"
 private const val PREFIX_PRIMITIVE_ARRAY = "PrimitiveArray"
 private const val PREFIX_QUEUE = "Queue"
 private const val PREFIX_LINKED_LIST = "LinkedList"
+private const val PREFIX_COMBINED = "Combined"
+
 
 abstract class ImplicitTestType(pathName: String) : TestType(pathName) {
     class HashMap : ImplicitTestType(PREFIX_HASH_MAP)
@@ -16,4 +18,5 @@ abstract class ImplicitTestType(pathName: String) : TestType(pathName) {
     class PrimitiveArray : ImplicitTestType(PREFIX_PRIMITIVE_ARRAY)
     class Queue : ImplicitTestType(PREFIX_QUEUE)
     class LinkedList : ImplicitTestType(PREFIX_LINKED_LIST)
+    class Combined : ImplicitTestType(PREFIX_COMBINED)
 }

@@ -18,3 +18,4 @@ abstract class ExplicitTestType(pathName: String) : TestType(pathName) {
     class AsFieldFull : ExplicitTestType("$PREFIX_AS_FIELD$SUFFIX_FULL_NAME")
     class Combined : ExplicitTestType(PREFIX_COMBINED)
 }
+
