@@ -1,52 +1,50 @@
 package com.github.hardes1.taskmavenartifacts.explicit
 
-import com.github.hardes1.taskmavenartifacts.util.TestRunner
 import com.github.hardes1.taskmavenartifacts.inspections.URLHashCodeExplicitInvocationInspection
-import com.github.hardes1.taskmavenartifacts.util.FileExtension
-import com.github.hardes1.taskmavenartifacts.util.TestType
+import com.github.hardes1.taskmavenartifacts.util.*
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase
 
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
-class UrlHashCodeInspectionExplicitJavaTest : LightJavaCodeInsightFixtureTestCase() {
-    private lateinit var testRunner: TestRunner
+class URLHashCodeInspectionExplicitJavaTest : LightJavaCodeInsightFixtureTestCase(), TestRunnerOwner {
+    override val testRunner: TestRunner by lazy {
+        HighlightTestRunner(myFixture, FileExtension.JAVA)
+    }
 
     override fun setUp() {
         super.setUp()
         myFixture.enableInspections(URLHashCodeExplicitInvocationInspection::class.java)
         myFixture.addClass("package java.net; public final class URL {@Override public int hashCode() {return super.hashCode();}}")
-        testRunner = TestRunner(myFixture, FileExtension.JAVA)
     }
 
     override fun getTestDataPath() = "src/test/testData/java/explicit"
 
     fun testHighlightReferenceSimpleName() {
-        testRunner.doTest(TestType.REFERENCE_SIMPLE)
+        testRunner.doTest(ExplicitTestType.ReferenceSimple())
     }
 
     fun testHighlightReferenceFullName() {
-        testRunner.doTest(TestType.REFERENCE_FULL)
+        testRunner.doTest(ExplicitTestType.ReferenceFull())
     }
 
     fun testHighlightTemporarySimpleName() {
-        testRunner.doTest(TestType.TEMPORARY_SIMPLE)
+        testRunner.doTest(ExplicitTestType.TemporarySimple())
     }
 
     fun testHighlightTemporaryFullName() {
-        testRunner.doTest(TestType.TEMPORARY_FULL)
+        testRunner.doTest(ExplicitTestType.TemporaryFull())
     }
 
     fun testHighlightAsFieldSimpleName() {
-        testRunner.doTest(TestType.AS_FIELD_SIMPLE)
+        testRunner.doTest(ExplicitTestType.AsFieldSimple())
     }
 
     fun testHighlightAsFieldFullName() {
-        testRunner.doTest(TestType.AS_FIELD_FULL)
+        testRunner.doTest(ExplicitTestType.AsFieldFull())
     }
 
     fun testHighlightCombined() {
-        testRunner.doTest(TestType.COMBINED)
-
+        testRunner.doTest(ExplicitTestType.Combined())
     }
 }
