@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="3ad2d0b1-e5f6-3f48-bd47-9e74857744e6" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="5d41402a-bc4b-3a76-b971-9d911017c592" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="SSBasedInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <searchConfiguration name="Attempt to call hashCode() explicitly on URL object" description="&lt;p&gt;&#10;    The hashCode method of java.net.URL may trigger a name service (usually DNS) lookup to resolve the host name or IP address. Depending on the configuration, and network status, that can take a long time. URI on the other hand makes no such calls and should be used instead unless the specific URL functionality is required.&#10;&lt;/p&gt;&#10;&lt;p&gt;&#10;    In general it is better to use the URI class until access to the resource is actually needed, at which point you can just convert the URI to a URL using URI.toURL().&#10;&lt;/p&gt;" text="$Before$.hashCode($Parameter$)" recursive="true" caseInsensitive="true" type="Kotlin" pattern_context="default">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="Before" nameOfExprType="java\.net\.URL" within="" contains="" />
+        <constraint name="Parameter" minCount="0" maxCount="0" within="" contains="" />
+      </searchConfiguration>
+      <searchConfiguration name="hello" text="abstract class $Class$ {&#10;  $FieldType$ $Field$ = $Init$;&#10;}" recursive="true" caseInsensitive="true" type="JAVA" pattern_context="default">
+        <constraint name="__context__" within="" contains="" />
+        <constraint name="Class" script="&quot;!__context__.interface &amp;&amp; !__context__.enum &amp;&amp; !__context__.record&quot;" within="" contains="" />
+        <constraint name="FieldType" within="" contains="" />
+        <constraint name="Field" withinHierarchy="true" target="true" within="" contains="" />
+        <constraint name="Init" minCount="0" within="" contains="" />
+      </searchConfiguration>
+    </inspection_tool>
+  </profile>
+</component>
